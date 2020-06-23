@@ -6,6 +6,7 @@ fun evaluate_combinations combinations propostion =
 fun get_index_of_false list start_index = 
     case list of (head::[]) => if head then ~1 else start_index
     | (head::list) => if head then get_index_of_false list start_index + 1 else start_index
+    | [] => ~1
 ;
 
 fun get_element_at list start_index end_index = 
