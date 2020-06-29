@@ -1,6 +1,6 @@
 fun evaluate_combinations combinations propostion = 
-    case combinations of (combination::[]) => (evalProp combination proposition)::[]
-    | (combination::combinations) => (evalProp combination proposition)::(evaluate_combinations combinations)
+    case combinations of (combination::[]) => (evalProp proposition combination)::[]
+    | (combination::combinations) => (evalProp proposition combination)::(evaluate_combinations combinations)
 ;
 
 fun get_index_of_false list start_index = 
@@ -16,11 +16,9 @@ fun get_element_at list start_index end_index =
 
 fun bool_to_string bool = if bool then "true" else "false";
 
-fun variable_to_string value = value;
-
 fun values_to_string assigments = 
-    case assigments of ((logical_variable, value)::[]) => (variable_to_string logical_variable) ^ " = " ^ (bool_to_string value)
-    | ((logical_variable, value)::assigments) => (variable_to_string logical_variable) ^ " = " ^ (bool_to_string value) ^ ", " ^(values_to_string assigments)
+    case assigments of ((logical_variable, value)::[]) => (logical_variable) ^ " = " ^ (bool_to_string value)
+    | ((logical_variable, value)::assigments) => (logical_variable) ^ " = " ^ (bool_to_string value) ^ ", " ^(values_to_string assigments)
 ;
 
 fun taut proposition = 
