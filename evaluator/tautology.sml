@@ -1,6 +1,6 @@
 fun evaluate_combinations combinations propostion = 
-    case combinations of (combination::[]) => (evalProp proposition combination)::[]
-    | (combination::combinations) => (evalProp proposition combination)::(evaluate_combinations combinations)
+    case combinations of (combination::[]) => (evalProp combination proposition)::[]
+    | (combination::combinations) => (evalProp combination proposition)::(evaluate_combinations combinations)
 ;
 
 fun get_index_of_false list start_index = 
@@ -24,10 +24,9 @@ fun values_to_string assigments =
 fun taut proposition = 
     let
         val simplification = simpl proposition
-        val normal_form = fnd simplification
-        val variables = vars normal_form
+        val variables = vars simplification
         val values = gen_bools variables
-        val evalation_results = evaluate_combinations values normal_form
+        val evalation_results = evaluate_combinations values simplification
         val index_of_false = get_index_of_false evalation_results 0
     in
         if index_of_false = ~1 then
