@@ -26,10 +26,10 @@ fun simpl_aux proposition =
                 then prop2 
            else 
                 implicacion (simpl_aux prop1, simpl_aux prop2)
-    | negacion prop1
-        =>  simpl_aux prop1
     | negacion (negacion prop1)
         => prop1
+    | negacion prop1
+        =>  negacion (simpl_aux prop1)
     | equivalencia (prop1, prop2)
         => if prop1 = prop2
                 then constante true 
